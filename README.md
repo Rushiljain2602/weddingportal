@@ -40,5 +40,5 @@ If you want to run or inspect the project locally:
 
 1. **Clone the repository:**
    ```bash
-   git clone [https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git](https://github.com/YOUR_USERNAME/YOUR_REPO_NAME.git)
-   cd YOUR_REPO_NAME
+   git clone https://github.com/Rushiljain2602/weddingportal.git
+cd weddingportal
