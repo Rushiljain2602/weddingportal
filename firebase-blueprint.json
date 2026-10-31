@@ -1,0 +1,167 @@
+{
+  "entities": {
+    "SaaSWedding": {
+      "title": "SaaSWedding",
+      "description": "Multi-tenant wedding registration and administrative licensing tier",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "resortName": { "type": "string" },
+        "colorTheme": { "type": "string", "enum": ["emerald", "rose", "indigo", "amber", "burgundy"] },
+        "totalBudget": { "type": "number" },
+        "status": { "type": "string", "enum": ["active", "locked"] },
+        "ownerName": { "type": "string" },
+        "adminEmail": { "type": "string" },
+        "adminPassword": { "type": "string" },
+        "createdAt": { "type": "string" },
+        "brideName": { "type": "string" },
+        "groomName": { "type": "string" },
+        "activeMonths": { "type": "number" },
+        "expiresAt": { "type": "string" },
+        "invitationTheme": { "type": "string" },
+        "customInvitationImage": { "type": "string" },
+        "saveTheDateTemplate": { "type": "string" },
+        "officialInvitationTemplate": { "type": "string" },
+        "rsvpReminderTemplate": { "type": "string" },
+        "whatsappToken": { "type": "string" },
+        "whatsappPhoneNumberId": { "type": "string" }
+      },
+      "required": ["id", "title", "resortName", "colorTheme", "totalBudget", "status", "ownerName", "adminEmail", "createdAt"]
+    },
+    "ItineraryEvent": {
+      "title": "ItineraryEvent",
+      "description": "A scheduled event in the wedding itinerary",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "date": { "type": "string" },
+        "time": { "type": "string" },
+        "venue": { "type": "string" },
+        "dressCode": { "type": "string" },
+        "isMainWeddingDate": { "type": "boolean" },
+        "useForMessaging": { "type": "boolean" }
+      },
+      "required": ["id", "title", "date", "time", "venue", "dressCode"]
+    },
+    "Guest": {
+      "title": "Guest",
+      "description": "An invited wedding guest",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "phone": { "type": "string" },
+        "side": { "type": "string", "enum": ["Bride", "Groom"] },
+        "invitedEvents": { "type": "array" },
+        "rsvp": { "type": "object" },
+        "roomId": { "type": "string", "description": "Assigned room ID if any" }
+      },
+      "required": ["id", "name", "phone", "side", "invitedEvents", "rsvp"]
+    },
+    "Room": {
+      "title": "Room",
+      "description": "A hotel room or palace suite",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "capacity": { "type": "number" }
+      },
+      "required": ["id", "name", "capacity"]
+    },
+    "TransportRecord": {
+      "title": "TransportRecord",
+      "description": "A flight arrival or ground transit schedule for a guest",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "guestName": { "type": "string" },
+        "arrivalDateTime": { "type": "string" },
+        "travelMode": { "type": "string" },
+        "assignedCab": { "type": "string" }
+      },
+      "required": ["id", "guestName", "arrivalDateTime", "travelMode", "assignedCab"]
+    },
+    "Task": {
+      "title": "Task",
+      "description": "A crew task delegated to family/squad members",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "assignedTo": { "type": "string" },
+        "deadline": { "type": "string" },
+        "status": { "type": "string", "enum": ["To-Do", "In Progress", "Done"] }
+      },
+      "required": ["id", "name", "assignedTo", "deadline", "status"]
+    },
+    "Expense": {
+      "title": "Expense",
+      "description": "A payment log for vendors or categories",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "category": { "type": "string" },
+        "vendorName": { "type": "string" },
+        "estimatedCost": { "type": "number" },
+        "paidAmount": { "type": "number" },
+        "pendingAmount": { "type": "number" },
+        "status": { "type": "string", "enum": ["Paid", "Partial", "Unpaid"] }
+      },
+      "required": ["id", "category", "vendorName", "estimatedCost", "paidAmount", "pendingAmount", "status"]
+    },
+    "AdminUser": {
+      "title": "AdminUser",
+      "description": "Credentialed portal organizer, coordinator or supervisor with custom passcode access",
+      "type": "object",
+      "properties": {
+        "id": { "type": "string" },
+        "email": { "type": "string" },
+        "name": { "type": "string" },
+        "password": { "type": "string" },
+        "role": { "type": "string", "enum": ["Admin", "Organizer", "Coordinator"] }
+      },
+      "required": ["id", "email", "name", "password", "role"]
+    }
+  },
+  "firestore": {
+    "/weddings/{weddingId}": {
+      "schema": "SaaSWedding",
+      "description": "Main client portal registrations and configuration"
+    },
+    "/weddings/{weddingId}/itinerary/{eventId}": {
+      "schema": "ItineraryEvent",
+      "description": "Curated wedding events schedule for the portal"
+    },
+    "/rsvps/{guestId}": {
+      "schema": "Guest",
+      "description": "Comprehensive root guest lists and live RSVPs"
+    },
+    "/weddings/{weddingId}/guests/{guestId}": {
+      "schema": "Guest",
+      "description": "Comprehensive guest lists and live RSVPs"
+    },
+    "/weddings/{weddingId}/rooms/{roomId}": {
+      "schema": "Room",
+      "description": "Luxury hotel room and palace suites allocations"
+    },
+    "/weddings/{weddingId}/transport/{transportId}": {
+      "schema": "TransportRecord",
+      "description": "Guest flight details and cab arrangements"
+    },
+    "/weddings/{weddingId}/tasks/{taskId}": {
+      "schema": "Task",
+      "description": "Family and crew tasks taskboard"
+    },
+    "/weddings/{weddingId}/expenses/{expenseId}": {
+      "schema": "Expense",
+      "description": "Vendor billing tracker and allocated expenses"
+    },
+    "/weddings/{weddingId}/admins/{adminId}": {
+      "schema": "AdminUser",
+      "description": "Login credentials and privilege assignments of wedding coordinators"
+    }
+  }
+}

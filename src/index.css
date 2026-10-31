@@ -1,0 +1,51 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", Georgia, serif;
+  
+  --color-emerald: #064E3B;
+  --color-emerald-dark: #043427;
+  --color-gold: #D4AF37;
+  --color-gold-dark: #B38F23;
+  --color-navy: #001F3F;
+  --color-ivory: #FDFCF7;
+  --color-accent-gold: rgba(212, 175, 55, 0.2);
+}
+
+/* Elegant Backdrop for Premium Ivory Theme */
+body {
+  font-family: var(--font-sans);
+  background-color: var(--color-ivory); /* Premium Wedding Warm Ivory #FDFCF7 */
+  color: #1a1a1a; /* Elegant Contrast Charcoal */
+}
+
+/* Golden/Emerald Gradient Accents */
+.gold-text {
+  color: #c5a880;
+}
+
+/* Hide Lovable Badge per explicit user instruction */
+#lovable-badge, 
+[id*="lovable-badge"],
+[class*="lovable-badge"] {
+  display: none !important;
+  opacity: 0 !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+  height: 0 !important;
+  width: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Custom Scrollbar Hide Utility */
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+.scrollbar-hide {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+

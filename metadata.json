@@ -1,0 +1,6 @@
+{
+  "name": "Devansh & Helly Wedding Portal",
+  "description": "Comprehensive premium digital Wedding and Marriage Management Dashboard for Devansh and Helly, tracking invites, RSVP responses, rooms, transport, tasks, budget and itinerary.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
